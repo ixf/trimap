@@ -49,6 +49,7 @@ public:
   void select_triplets();
   void make_embedding();
   void validate();
+  float loss();
 };
 
 
@@ -133,7 +134,7 @@ void Trimap::select_triplets() {
   // Calculate and apply the scaling factor
   vector<float> sigmas(n_samples); // average of distance from 4th to 6th neighbour
   for(int i = 0; i < n_samples; i++){
-    for(int j = 0; j < 3; j++) {
+    for(int j = 3; j < 6; j++) {
       sigmas[i] += neighbour_dist[i][j];
     }
     sigmas[i] /= 3;
@@ -166,7 +167,19 @@ void Trimap::select_triplets() {
 };
 
 void Trimap::make_embedding() {
-  // this->embedding = ...
+  std::default_random_engine generator;
+  std::normal_distribution<float> distribution(0.0, 0.001);
+
+  for(int i = 0; i < input.size(); i++) {
+    vector<float> f(n_dims);
+    for(int j = 0; j < n_dims; j++) {
+      f.push_back(distribution(generator));
+    }
+    embedding.push_back(f);
+  }
+
+
+  // ...
 }
 
 void Trimap::validate() {
@@ -185,29 +198,12 @@ void Trimap::validate() {
   }
 }
 
-int main() {
-  srand(1234);
+float Trimap::loss() {
+  float s = 0.0;
 
-  int n_samples = 1000;
-  int n_dims = 60;
-
-  std::ifstream input_file("mnist_data");
-
-  float r;
-  vector<vector<float>> data;
-
-  for(int i = 0; i < n_samples; i++) {
-    vector<float> q;
-    for(int j = 0; j < n_dims; j++) {
-      input_file >> r;
-      q.push_back(r);
-    }
-    data.push_back(q);
+  for(int i = 0; i < triplets.size(); i++) {
+    
   }
 
-  int c = 5;
-  auto t = new Trimap(2, c*2, c, c);
-  t->run(data);
-  cout << "ok\n";
-  delete t;
+  return s;
 }
