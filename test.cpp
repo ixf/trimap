@@ -6,7 +6,7 @@
 using std::vector, std::cout;
 
 int main () {
-  vector<vector<float>> data;
+  vector<vector<double>> data;
   data.push_back({1, 0, 0});
   data.push_back({1, 1, 0});
   data.push_back({1, 4, 1});

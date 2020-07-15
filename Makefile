@@ -5,3 +5,6 @@ test: test.cpp trimap.h
 
 test_mnist: test_mnist.cpp trimap.h
 	g++ -g -o test_mnist test_mnist.cpp -std=c++17
+
+clean:
+	rm test test_mnist
