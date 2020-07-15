@@ -48,7 +48,6 @@ private:
 
   // major helpers
   void initialize_embedding();
-  void validate();
   void gd(
       vector<vector<double>> &tmp,
       vector<vector<double>> &velocity,
@@ -57,7 +56,6 @@ private:
       double &loss_value,
       double gamma,
       double learning_rate);
-  double loss();
 
   // minor helpers
   double dist(int i, int j);
@@ -386,37 +384,6 @@ void Trimap::gd(
   }
 
   loss_value = loss;
-};
-
-void Trimap::validate()
-{
-  for (int i = 0; i < triplets.size(); i++)
-  {
-    vector<int> triplet = triplets[i];
-    int a = triplet[0];
-    int b = triplet[1];
-    int c = triplet[2];
-
-    double dab = dist(a, b);
-    double dac = dist(a, c);
-
-    if (dac < dab)
-    {
-      cout << i << ": " << a << " " << b << " " << c << " " << dab << " " << dac
-           << "\n";
-    }
-  }
-};
-
-double Trimap::loss()
-{
-  double s = 0.0;
-
-  for (int i = 0; i < triplets.size(); i++)
-  {
-  }
-
-  return s;
 };
 
 // minor helpers
