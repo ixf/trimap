@@ -1,25 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_digits
+Y = load_digits().target
 
-with open("impl_out", "r") as f:
-    q = f.read().split('\n')
+cdict = ["red","green", "blue"]
 
-q = [w.rstrip() for w in q]
-q = [w.split(' ') for w in q]
-q = [list(map(float, w)) for w in q[:-1]]
-q = np.array(q)
+def plot(name):
+    with open(name, "r") as f:
+        q = f.read().split('\n')
 
-plt.scatter(q[:, 0], q[:, 1])
+    q = [w.rstrip() for w in q]
+    q = [w.split(' ') for w in q]
+    q = [list(map(float, w)) for w in q[:-1]]
+    q = np.array(q)
 
-plt.show()
+    fig, ax = plt.subplots()
+    for g in np.unique(Y):
+        ix = np.where(Y == g)
+        # ax.scatter(q[ix], q[ix], c = cdict[g], label = g, s = 100)
+        print(g, type(g))
+        qq = q[ix]
+        ax.scatter(qq[:, 0], qq[:, 1], label = g, s = 2)
 
-with open("demo_out", "r") as f:
-    q = f.read().split('\n')
+    ax.legend()
+    plt.show()
 
-q = [w.rstrip() for w in q]
-q = [w.split(' ') for w in q]
-q = [list(map(float, w)) for w in q[:-1]]
-q = np.array(q)
-
-plt.scatter(q[:, 0], q[:, 1])
-plt.show()
+plot("demo_out")
+plot("impl_out")
