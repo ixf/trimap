@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import load_digits
 Y = load_digits().target
 
-cdict = ["red","green", "blue"]
+cdict = ["red", "green", "blue"]
+
 
 def plot(name):
     with open(name, "r") as f:
@@ -14,16 +15,15 @@ def plot(name):
     q = [list(map(float, w)) for w in q[:-1]]
     q = np.array(q)
 
-    fig, ax = plt.subplots()
+    _fig, ax = plt.subplots()
     for g in np.unique(Y):
         ix = np.where(Y == g)
-        # ax.scatter(q[ix], q[ix], c = cdict[g], label = g, s = 100)
-        print(g, type(g))
         qq = q[ix]
-        ax.scatter(qq[:, 0], qq[:, 1], label = g, s = 2)
+        ax.scatter(qq[:, 0], qq[:, 1], label=g, s=2)
 
     ax.legend()
     plt.show()
+
 
 plot("demo_out")
 plot("impl_out")

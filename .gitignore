@@ -33,4 +33,8 @@
 
 annoy
 /trimap
-test*
+test_mnist
+test_mnist.ilk
+test_mnist.pdb
+
+*_out

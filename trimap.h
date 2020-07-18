@@ -249,13 +249,13 @@ void Trimap::make_embedding()
 
   double gamma = 0.3;
 
-  for (int iter = 0; iter < iterations; iter++)
+  for (int iter = 1; iter <= iterations; iter++)
   {
     vector<vector<double>> tmp(n_samples, vector<double>(out_dims, 0.0));
     int violations = 0;      // grad method output
     double loss_value = 0.0; // grad method output
 
-    gamma = (iter > 250) ? 0.5 : 0.3;
+    gamma = (iter >= 250) ? 0.5 : 0.3;
 
     for (int i = 0; i < n_samples; i++)
     {
@@ -269,7 +269,7 @@ void Trimap::make_embedding()
        violations, loss_value,
        gamma, learning_rate);
 
-    if ((iter + 1) % 25 == 0)
+    if (iter % 25 == 0)
     {
       cout << "Iteration: " << iter << ", "
            << "Loss: " << loss_value << ", "
