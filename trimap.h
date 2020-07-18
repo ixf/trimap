@@ -314,14 +314,14 @@ void Trimap::gd(
   vector<double> y_ik(out_dims);
   double loss = 0.0;
 
+  double d_ij = 1.0, d_ik = 1.0;
+
   for (int t = 0; t < n_triplets; t++)
   {
     vector<int> triplet = triplets[t];
     int i = triplet[0];
     int j = triplet[1];
     int k = triplet[2];
-
-    double d_ij = 1.0, d_ik = 1.0;
 
     if ((t % mi == 0) ||
         (t >= n_basic_triplets) // ???
