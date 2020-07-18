@@ -9,3 +9,7 @@ Files:
  - demo.py - usage example of the original implementation
  - test_mnist.cpp - usage example
  - plots.py - compares demo.py and test_mnist results
+
+The result of running test_mnist and plots.py:
+
+![Results](results.png)
